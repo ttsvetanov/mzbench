@@ -40,11 +40,11 @@ metrics() ->
                                   {"tcpkali.traffic.bitrate.out", gauge}]}},
             {graph, #{title => "Traffic data",
                       units => "N",
-                      metrics => [{"tcpkali.traffic.data", gauge},
-                                  {"tcpkali.traffic.data.rcvd", gauge},
-                                  {"tcpkali.traffic.data.sent", gauge},
-                                  {"tcpkali.traffic.data.reads", gauge},
-                                  {"tcpkali.traffic.data.writes", gauge}]}}
+                      metrics => [{"tcpkali.traffic.data", counter},
+                                  {"tcpkali.traffic.data.rcvd", counter},
+                                  {"tcpkali.traffic.data.sent", counter},
+                                  {"tcpkali.traffic.data.reads", counter},
+                                  {"tcpkali.traffic.data.writes", counter}]}}
         ]}
     ].
 
