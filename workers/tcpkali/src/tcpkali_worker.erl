@@ -52,9 +52,14 @@ start(#state{executable = Exec} = State, _Meta, Options) ->
     Command = Exec ++ lists:foldr(fun({url, Url}, A) -> A ++ " " ++ Url;
                         ({Opt, Val}, A) ->
                             L = string:join(string:tokens(atom_to_list(Opt), "_"), "-"),
+                            Val2 = case length(string:tokens(Val, " ")) of
+                                0 -> Val;
+                                1 -> Val;
+                                _ -> "\"" ++ Val ++ "\""
+                                    end,
                             case length(L) of
-                                1 -> A ++ " -" ++ L ++ Val;
-                                _ -> A ++ " --" ++ L ++ " " ++ Val end end,
+                                1 -> A ++ " -" ++ L ++ Val2;
+                                _ -> A ++ " --" ++ L ++ " " ++ Val2 end end,
                             "", Options),
     lager:info("Executing ~p...", [Command]),
     case run(Command) of
